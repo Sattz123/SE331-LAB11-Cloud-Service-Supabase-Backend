@@ -1,6 +1,7 @@
 package se331.lab.util;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import se331.lab.entity.Event;
 import se331.lab.entity.EventDTO;
@@ -16,6 +17,8 @@ public interface LabMapper {
     LabMapper INSTANCE = Mappers.getMapper(LabMapper.class);
     EventDTO getEventDto(Event event);
     List<EventDTO> getEventDto(List<Event> events);
+    @Mapping(target = "address", source = "address")
+    @Mapping(target = "image", source = "image")
     OrganizerDTO getOrganizerDTO(Organizer organizer);
     List<OrganizerDTO> getOrganizerDTO(List<Organizer> organizers);
     ParticipantWithEventsDTO getParticipantWithEventsDTO(Participant participant);

@@ -3,6 +3,7 @@ package se331.lab.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,15 @@ public class OrganizerController {
     @GetMapping("/organizers")
     ResponseEntity<?> getOrganizers() {
         return ResponseEntity.ok(LabMapper.INSTANCE.getOrganizerDTO(organizerService.getAllOrganizer()));
+    }
+
+    @GetMapping("/organizers/{id}")
+    ResponseEntity<?> getOrganizer(@PathVariable("id") Long id) {
+        Organizer organizer = organizerService.getOrganizer(id);
+        if (organizer == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(LabMapper.INSTANCE.getOrganizerDTO(organizer));
     }
 
     @PostMapping("/organizers")

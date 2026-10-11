@@ -1,6 +1,7 @@
 package se331.lab.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,4 +36,6 @@ public class Event {
     Organizer organizer;
     @ManyToMany(mappedBy = "eventHistories")
     List<Participant> participants;
+    @ElementCollection
+    List<String> images;
 }
